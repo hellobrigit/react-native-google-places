@@ -26,8 +26,6 @@
 
 - (void)openAutocompleteModal: (GMSAutocompleteFilter *)autocompleteFilter
                     placeFields: (GMSPlaceField)selectedFields
-                       bounds: (GMSCoordinateBounds *)autocompleteBounds
-                       boundsMode: (GMSAutocompleteBoundsMode)autocompleteBoundsMode
                      resolver: (RCTPromiseResolveBlock)resolve
                      rejecter: (RCTPromiseRejectBlock)reject;
 {
@@ -36,8 +34,6 @@
     
     GMSAutocompleteViewController *viewController = [[GMSAutocompleteViewController alloc] init];
     viewController.autocompleteFilter = autocompleteFilter;
-    viewController.autocompleteBounds = autocompleteBounds;
-    viewController.autocompleteBoundsMode = autocompleteBoundsMode;
     viewController.placeFields = selectedFields;
 	viewController.delegate = self;
     UIViewController *topController = [self getTopController];
