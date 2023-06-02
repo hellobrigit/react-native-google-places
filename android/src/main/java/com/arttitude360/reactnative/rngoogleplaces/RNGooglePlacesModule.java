@@ -13,7 +13,7 @@ import android.support.annotation.RequiresPermission;
 import android.support.v4.content.ContextCompat;
 import 	android.support.v4.app.ActivityCompat;
 
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_WIFI_STATE;
 
 import com.facebook.react.bridge.ActivityEventListener;
@@ -321,15 +321,15 @@ public class RNGooglePlacesModule extends ReactContextBaseJavaModule implements 
     public void getCurrentPlace(ReadableArray fields, final Promise promise) {
         if (ContextCompat.checkSelfPermission(this.reactContext.getApplicationContext(), permission.ACCESS_WIFI_STATE)
             != PackageManager.PERMISSION_GRANTED
-        || ContextCompat.checkSelfPermission(this.reactContext.getApplicationContext(), permission.ACCESS_FINE_LOCATION)
+        || ContextCompat.checkSelfPermission(this.reactContext.getApplicationContext(), permission.ACCESS_COARSE_LOCATION)
             != PackageManager.PERMISSION_GRANTED) {        
-            promise.reject("E_CURRENT_PLACE_ERROR", new Error("Both ACCESS_WIFI_STATE & ACCESS_FINE_LOCATION permissions are required"));
+            promise.reject("E_CURRENT_PLACE_ERROR", new Error("Both ACCESS_WIFI_STATE & ACCESS_COARSE_LOCATION permissions are required"));
             return;
         }
 
         List<Place.Field> selectedFields = getPlaceFields(fields.toArrayList(), true);
 
-        if (checkPermission(ACCESS_FINE_LOCATION)) {
+        if (checkPermission(ACCESS_COARSE_LOCATION)) {
             findCurrentPlaceWithPermissions(selectedFields, promise);
         }
     }
@@ -339,7 +339,7 @@ public class RNGooglePlacesModule extends ReactContextBaseJavaModule implements 
    * most
    * likely to be at currently.
    */
-    @RequiresPermission(allOf = {ACCESS_FINE_LOCATION, ACCESS_WIFI_STATE})
+    @RequiresPermission(allOf = {ACCESS_COARSE_LOCATION, ACCESS_WIFI_STATE})
     private void findCurrentPlaceWithPermissions(List<Place.Field> selectedFields, final Promise promise) {
 
         FindCurrentPlaceRequest currentPlaceRequest =

@@ -85,7 +85,7 @@ end
 - In your AndroidManifest.xml file, request location permissions and add your API key in a meta-data tag (ensure you are within the `<application>` tag as follows:
 
 ```xml
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 <application
       android:name=".MainApplication"
       ...>
